@@ -1,10 +1,12 @@
 openbeam_w=15;
 hole_extra_size=0.50;
 
-module rounded_xy_cube(size, r) {
-  translate([r,r,0]) {
+module rounded_xy_cube(size, r, center=false) {
+  offset = center ? 0 : r;
+
+  translate([offset, offset, 0]) {
     minkowski() {
-      cube(size - [r*2, r*2, 0], center=true);
+      cube(size - [r*2, r*2, 0], center);
       cylinder(r=r, h=0.00001);
     }
   }
